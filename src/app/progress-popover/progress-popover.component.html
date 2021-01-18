@@ -1,0 +1,10 @@
+<ion-list>
+
+  <ion-list-header>Serviços Prestados(R$)</ion-list-header>
+
+  <ion-item *ngFor="let sale of salesPerService">
+
+    <p>{{sale.title}}: {{sale.value | currency: 'BRL': 'symbol'}}</p>
+  </ion-item>
+  <ion-item button (click)="doDismiss();">Fechar</ion-item>
+</ion-list>

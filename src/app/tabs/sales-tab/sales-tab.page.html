@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center" color="rcustom">
+    <ion-title>Minhas Vendas</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+
+    <ion-segment color="rcustom" value="hoje" (ionChange)="presentSales($event);">
+
+      <ion-segment-button value="hoje">
+
+        <ion-label *ngIf="salesSearchFilter != 'hoje'">Hoje</ion-label>
+        <ion-label *ngIf="salesSearchFilter == 'hoje'">Hoje <br> ({{sales.length}})</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="7 dias">
+
+        <ion-label *ngIf="salesSearchFilter != '7 dias'">7 dias</ion-label>
+        <ion-label *ngIf="salesSearchFilter == '7 dias'">7 dias <br> ({{sales.length}})</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="mes">
+
+        <ion-label *ngIf="salesSearchFilter != 'mes'">Mês</ion-label>
+        <ion-label *ngIf="salesSearchFilter == 'mes'">Mês <br> ({{sales.length}})</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="total">
+
+        <ion-label *ngIf="salesSearchFilter != 'total'">Total</ion-label>
+        <ion-label *ngIf="salesSearchFilter == 'total'">Total <br> ({{sales.length}})</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="hasError" class="container ion-justify-content-center ion-align-items-center">
+
+    <span class="fail-span">Não foi possivel listar as vendas. <br> <a (click)="presentSales();">Tentar novamente <ion-icon name="refresh"></ion-icon></a></span>
+  </div>
+
+  <div *ngIf="!hasError && sales.length == 0" class="container ion-justify-content-center ion-align-items-center">
+
+    <span class="fail-span">Não há vendas para listar.</span>
+  </div>
+  <div *ngIf="!hasError && sales.length > 0">
+
+    <ion-list *ngFor="let sale of sales; let i = index;" class="lista" lines="none" detail="none">
+
+      <ion-item button class="accordion" (click)="changeStatus(sale);">
+  
+        <ion-icon *ngIf="!sale.open" slot="end" name="chevron-down-outline"></ion-icon>
+        <ion-icon *ngIf="sale.open" slot="end" name="chevron-up-outline"></ion-icon>
+        <ion-grid>
+  
+          <ion-row>
+  
+            <ion-col size="3">#{{sale.id}}</ion-col>
+
+            <ion-col size="1">
+              
+              <ion-icon name="receipt-outline"></ion-icon>
+            </ion-col>
+
+            <ion-col size="8">
+              
+              <ion-label>{{sale.service_name}}</ion-label>
+                    
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item *ngIf="sale.open" class="inside-item">
+
+        <ion-grid class="ion-no-padding">
+
+          <ion-row class="table-header">
+
+            <ion-col class="ion-no-padding table-header" size="4">Cliente</ion-col>
+            <ion-col class="ion-no-padding table-header" size="5">Preço aplicado</ion-col>
+            <ion-col class="ion-no-padding table-header" size="3">Data</ion-col>
+          </ion-row>
+
+          <ion-row>
+
+            <ion-col class="ion-no-padding ion-padding-top" size-xs="4" size-sm="4">{{sale.client_name}}</ion-col>
+            <ion-col class="ion-no-padding ion-padding-top" size-xs="4" size-sm="5">{{sale.aplied_price | currency: 'BRL': symbol}}</ion-col>
+            <ion-col class="ion-no-padding ion-padding-top" size-xs="4" size-sm="3">{{sale.date.split('-').reverse().join('/')}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

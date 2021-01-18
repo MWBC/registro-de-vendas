@@ -1,5 +1,7 @@
 {
   "name": "registroDeVendas",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

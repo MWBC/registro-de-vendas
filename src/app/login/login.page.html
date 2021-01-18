@@ -1,0 +1,46 @@
+<ion-content color="rcustom" style="display: flex; justify-content: flex-end;">
+
+  <ion-grid>
+
+    <ion-row class="ion-justify-content-center">
+
+      <ion-col size="4">
+
+        <img class="foto" src="../../assets/imgs/rv.png">
+      </ion-col>
+    </ion-row>
+
+    <div>
+
+      <ion-row>
+
+        <ion-col>
+  
+          <form class="formLogin" [formGroup]="formLogin" (ngSubmit)="login()">
+  
+            <ion-item class="item">
+  
+              <ion-label color="light" position="stacked">Email</ion-label>
+              <ion-input class="inputForm" inputmode="email" formControlName="email" placeholder="Digite o seu email"></ion-input>
+            </ion-item>
+
+            <ion-item class="item">
+
+              <ion-label color="light" position="stacked">Senha</ion-label>
+              <ion-input [type]="showPassword ? 'text': 'password'" class="inputForm" inputmode="password" formControlName="password" placeholder="Digite a sua senha"></ion-input>
+              <ion-button slot="end" color="rcustom" (click)="changePasswordVisibility()"><ion-icon [name]="showPassword ? 'eye-off': 'eye'"></ion-icon></ion-button>
+            </ion-item>
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+
+              <ion-col size="12">
+
+                <ion-button expand="full" type="submit" class="botaoSubmit">Entrar</ion-button>
+              </ion-col>
+            </div>            
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

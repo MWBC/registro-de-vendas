@@ -1,0 +1,22 @@
+.modal-label {
+
+    font-size: 1.2rem;
+}
+
+.modal-input {
+
+    font-size: 1.2rem;
+}
+
+.custom-ion-item-invalid {
+
+    --highlight-color-valid: red;
+}
+
+.invalid-input-value {
+
+    & span {
+
+        color: red;
+    }
+}

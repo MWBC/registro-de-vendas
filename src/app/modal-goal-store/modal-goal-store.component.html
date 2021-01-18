@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-toolbar>
+
+    <ion-title class="toolbar-title">Criar Meta</ion-title>
+
+    <ion-buttons slot="end">
+
+      <ion-button (click)="doDismiss();">Cancelar</ion-button>
+      <ion-button (click)="storeGoal();">Salvar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid style="margin-top: 10px;">
+
+    <ion-row style="display: flex; justify-content: center;">
+
+      <!-- <ion-col size="5">
+
+        <ion-item>
+
+          <ion-label position="default" class="modal-label">Valor:</ion-label>
+        </ion-item>
+
+      </ion-col> -->
+      <ion-col size="12">
+
+        <ion-item #ionItem>
+
+          <ion-label position="fixed" class="modal-label">Valor:</ion-label>
+          <ion-input [ngModel]="goalValue" class="modal-input" (ngModelChange)="changeGoalValue($event);" inputmode="numeric" placeholder="R$ 00,00"></ion-input>
+        </ion-item>
+      </ion-col>
+      <div *ngIf="showInvalidWarning" class="invalid-input-value">
+
+        <span>Valor inválido</span>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

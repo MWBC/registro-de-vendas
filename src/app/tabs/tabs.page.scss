@@ -1,0 +1,17 @@
+// .tab-selected {
+
+//     color: red;
+// }
+
+ion-tab-button {
+
+    --background:#8A0808;
+     --color-selected:yellow;
+    --color: white;
+
+}
+
+ion-tab-bar {
+
+    --background: var(--ion-color-rcustom);
+}

@@ -1,0 +1,44 @@
+.top-buttons {
+
+    border-right: 1px;
+    border-color: black;
+
+    --background-activated: red;
+}
+
+.grid-columns {
+
+    --ion-grid-column-padding: 0px;
+}
+
+.accordion {
+
+    --ion-item-background: #f3f2f1;
+    --border-radius: 5px;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    overflow-x: inherit;
+
+    ion-col {
+
+        --ion-grid-column-padding: 0px;
+    }
+}
+
+.inside-item {
+
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.table-header {
+
+    border-radius: 5px;
+    background-color: #F2F2F2;
+}
+
+.lista {
+
+    padding-top: 3px;
+    padding-bottom: 3px;
+}

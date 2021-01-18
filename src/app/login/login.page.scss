@@ -1,0 +1,47 @@
+.foto {
+    margin: 0 auto; 
+    display:block;
+      left: 0;
+      right: 0;
+      width:100%
+}
+
+ion-content {
+
+  --padding-top: 40px;
+}
+
+.formLogin {
+
+  padding: 40px;
+  margin-top: 40px;
+  background-color: #8A0808;
+  border: 1px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+.botaoSubmit {
+
+  padding: 0px; 
+  --color: white;
+  --background: red;
+}
+
+.item {
+
+  --background: #8A0808;
+  --highlight-color-invalid: yellow;
+  --color-focused: white;
+  --color-activated: white;
+}
+
+ .item-has-focus.label-stacked.sc-ion-label-md-h, .item-has-focus .label-stacked.sc-ion-label-md-h, .item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus .label-floating.sc-ion-label-md-h {
+
+   color: yellow;
+ }
+
+.inputForm {
+
+  color: white;
+}

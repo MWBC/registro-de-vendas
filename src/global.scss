@@ -9,6 +9,54 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+ .container {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    text-align: center;
+}
+
+.fail-span {
+
+    font-size: 1.2rem;
+    color: rgb(138, 109, 109);
+}
+
+ .customModal {
+
+    .toolbar-title {
+
+        --color: red;
+    }
+    --border-radius: 5px;
+ }
+ .customAlert {
+
+   .alert-title {
+
+       text-align: center;
+   }
+
+   .alert-message {
+
+       text-align: center;
+   }
+   
+}
+
+ .ion-color-rcustom {
+
+    --ion-color-base: var(--ion-color-rcustom);
+    --ion-color-base-rgb: var(--ion-color-rcustom-rgb);
+    --ion-color-contrast: var(--ion-color-rcustom-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-rcustom-contrast-rgb);
+    --ion-color-shade: var(--ion-color-rcustom-shade);
+    --ion-color-tint: var(--ion-color-rcustom-tint);
+ }
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
