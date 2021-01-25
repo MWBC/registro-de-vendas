@@ -102,12 +102,14 @@ export class MainTabPage implements OnInit {
 
   ngOnInit() {
     
+    this.authService.checkToken();
     moneyMask(3000.82);
     // this.prepareMainPage();
   }
 
   ionViewWillEnter() {
 
+    this.chartData = [{data: [], label: ''}];
     this.prepareMainPage();
   }
 getColors(qtd: number){
