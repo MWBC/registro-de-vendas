@@ -80,4 +80,19 @@ export class ServicesService {
 
     return labels;
   }
+
+  public getServiceName(serviceId: number, services) {
+
+    let serviceName = '';
+    console.log('Services: ', services);
+
+    for(let i = 0; i < services.length; i++){
+
+      console.log('servico: ', services[i].title);
+      services[i].id == serviceId ? serviceName = services[i].title: '';
+    }
+
+    console.log('nome do serviço: ', serviceName);
+    return serviceName;
+  }
 }
