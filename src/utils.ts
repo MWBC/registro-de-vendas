@@ -1,8 +1,9 @@
 
+import { CurrencyPipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { LoadingController, AlertController } from '@ionic/angular';
 
-export var URL_BASE = 'http://192.168.100.5/registroDeVendas/public/api/auth/';
+export var URL_BASE = 'http://192.168.100.19/Registro-de-Vendas-Backend-/public/api/auth/';
 
 export function moneyMask(value: number) {
 
@@ -81,25 +82,64 @@ export async function showAlert(title: string, message: string) {
 export function convertToFloat(event: any) {
 
     let value = event;
-    value = value.replace(/[\D]+/g, '');
 
     console.log(value);
 
-    if(value.length == 1){
+    if(value != undefined){
 
-      value = value.replace(/(\d)/g, '00.0$1');
-    }else if(value.length == 2){
+      value = value.replace(/[\D]+/g, '');
 
-      value = value.replace(/(\d{2})/g, '00.$1');
-    }else {
-
-      value = value.replace(/([0-9]{2})$/g, ".$1");
-
+      console.log(value);
+  
+      if(value.length == 1){
+  
+        value = value.replace(/(\d)/g, '00.0$1');
+      }else if(value.length == 2){
+  
+        value = value.replace(/(\d{2})/g, '00.$1');
+      }else {
+  
+        value = value.replace(/([0-9]{2})$/g, ".$1");
+  
+      }
+  
     }
 
     value = parseFloat(value);
-    value == 'NaN'? value = '': '';
+    console.log("TESTE MAXIMO: " + value)
+    isNaN(value)? value = '': '';
     console.log(value);
 
     return value;
 }
+
+export function changeValue(event: any, showInvalidWarning: boolean) {
+
+    let currencyPipe = new CurrencyPipe('pt-BR', 'BRL');
+    let value = convertToFloat(event);
+    value = currencyPipe.transform(value);
+  
+    return value;
+  }
+
+  export function validateValue(value: string) {
+
+    try{
+  
+      value = convertToFloat(value);
+  
+    }catch(e){
+      
+      return false;
+    }
+    
+    if(value.length == 0 || value == undefined){
+  
+      return false;
+    }else{
+  
+      return true;
+    }
+  }
+  
+  

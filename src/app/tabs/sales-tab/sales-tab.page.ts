@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SalesService } from './../../services/sales.service';
 import { showAlert, showLoading } from './../../../utils';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { ServicesService } from './../../services/services.service';
+import { ModalSaleShowComponent } from 'src/app/modal-sale-show/modal-sale-show.component';
+import { ModalSaleStoreComponent } from 'src/app/modal-sale-store/modal-sale-store.component';
 
 @Component({
   selector: 'app-sales-tab',
@@ -17,8 +19,17 @@ export class SalesTabPage implements OnInit {
   constructor(
     private salesService: SalesService, 
     private servicesService: ServicesService, 
-    private loadingController: LoadingController
-  ) { }
+    private loadingController: LoadingController, 
+    private modalController: ModalController
+  ) { 
+
+    salesService.refreshView$.subscribe(resp =>{
+
+      console.log('CHAMADA DO OBSERAVABLE NA TELA SAKES-TAB');
+      this.presentSales();
+  
+    }, error =>{console.log(error);});
+  }
 
   salesSearchFilter;
   sales = [];
@@ -46,7 +57,9 @@ export class SalesTabPage implements OnInit {
 
   async ionViewWillEnter() {
 
-    this.services = null;
+    // this.services = null;
+    await this.getServices();
+    console.log("Testando lifecycle");
   }
 
   tus() {
@@ -79,11 +92,11 @@ export class SalesTabPage implements OnInit {
 
           console.log('vendas diarias', this.sales);
 
-          await this.getServices();
+          // await this.getServices();
 
           this.sales.map(sale => {
 
-            sale.service_name = this.getServiceName(sale.service_id);
+            sale.service_name = this.servicesService.getServiceName(sale.service_id, this.services);
             sale.open = false;
           });
           this.hasError =false;
@@ -110,11 +123,11 @@ export class SalesTabPage implements OnInit {
           
           console.log(this.sales);
 
-          await this.getServices();
+          // await this.getServices();
 
           this.sales.map(sale => {
 
-            sale.service_name = this.getServiceName(sale.service_id);
+            sale.service_name = this.servicesService.getServiceName(sale.service_id, this.services);
             sale.open = false;
           });
 
@@ -142,12 +155,12 @@ export class SalesTabPage implements OnInit {
 
           console.log(this.sales);
 
-          await this.getServices();
+          // await this.getServices();
 
           console.log('OS SERVICOS: ', this.services);
           this.sales.map(sale => {
 
-            sale.service_name = this.getServiceName(sale.service_id);
+            sale.service_name = this.servicesService.getServiceName(sale.service_id, this.services);
             sale.open = false;
           });
 
@@ -175,11 +188,11 @@ export class SalesTabPage implements OnInit {
 
           //console.log(this.sales);
 
-          await this.getServices();
+          // await this.getServices();
 
           this.sales.map(sale => {
 
-            sale.service_name = this.getServiceName(sale.service_id);
+            sale.service_name = this.servicesService.getServiceName(sale.service_id, this.services);
             sale.open = false;
           });
 
@@ -206,19 +219,58 @@ export class SalesTabPage implements OnInit {
     }
   }
 
-  private getServiceName(serviceId: number) {
+  public async showModalSale(sale:any, showLabels:boolean) {
 
-    let serviceName = '';
-    console.log('Services: ', this.services);
+    console.log(sale);
+    const modal = await this.modalController.create({
 
-    for(let i = 0; i < this.services.length; i++){
+      id: 'modalShowSale', 
+      component: ModalSaleShowComponent, 
+      cssClass: 'customModal', 
+      componentProps: {
 
-      console.log('servico: ', this.services[i].title);
-      this.services[i].id == serviceId ? serviceName = this.services[i].title: '';
-    }
+        'sale': sale, 
+        'services': this.services, 
+        'showLabels': showLabels
 
-    console.log('nome do serviço: ', serviceName);
-    return serviceName;
+      }
+    });
+
+    return await modal.present();
+  }
+
+  public async showModalSaleStore() {
+
+    const modal = await this.modalController.create({
+
+      id: 'modalSaleStore', 
+      component: ModalSaleStoreComponent, 
+      componentProps: {
+
+        services: this.services, 
+        action: 'store'
+      }, 
+      cssClass: 'customModal'
+    });
+
+    return await modal.present();
+  }
+
+  public async showModalSaleUpdate() {
+
+    const modal = await this.modalController.create({
+
+      id: 'modalSaleStore', 
+      component: ModalSaleStoreComponent, 
+      componentProps: {
+
+        services: this.services, 
+        action: 'update'
+      }, 
+      cssClass: 'customModal'
+    });
+
+    return await modal.present();
   }
 
   private changeStatus(sale: any){
@@ -234,5 +286,10 @@ export class SalesTabPage implements OnInit {
       resp = JSON.parse(resp.data);
       this.services = resp['services'];
     }
+  }
+
+  public async deleteSale(sale:any) {
+
+    this.salesService.confirmeDeleteSaleAlert(sale.id);
   }
 }

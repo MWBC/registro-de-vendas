@@ -25,11 +25,14 @@ export class ModalGoalStoreComponent implements OnInit {
 
   changeGoalValue(event: any) {
 
-    this.showInvalidWarning = false;
-    let currencyPipe = new CurrencyPipe('pt-BR', 'BRL');
-    let value = convertToFloat(event);
-    this.goalValue = currencyPipe.transform(value);
-    console.log(this.ionItem['el'].classList);
+    this.goalValue = this.goalService.changeGoalValue(event, this.showInvalidWarning);
+    this.showInvalidWarning = ! this.goalService.validateGoalValue(this.goalValue);
+    console.log('showwarning: ', this.showInvalidWarning);
+    // this.showInvalidWarning = false;
+    // let currencyPipe = new CurrencyPipe('pt-BR', 'BRL');
+    // let value = convertToFloat(event);
+    // this.goalValue = currencyPipe.transform(value);
+    // console.log(this.ionItem['el'].classList);
   }
 
   async storeGoal() {

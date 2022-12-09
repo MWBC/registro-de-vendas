@@ -1,14 +1,7 @@
-.top-buttons {
+.table-header {
 
-    border-right: 1px;
-    border-color: black;
-
-    --background-activated: red;
-}
-
-.grid-columns {
-
-    --ion-grid-column-padding: 0px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
 }
 
 .accordion {
@@ -30,18 +23,6 @@
     border-radius: 5px;
     margin-top: 10px;
     overflow-x: inherit;
-}
-
-.table-header {
-
-    border-radius: 5px;
-    background-color: #F2F2F2;
-}
-
-.lista {
-
-    padding-top: 3px;
-    padding-bottom: 3px;
 }
 
 .edit-option {

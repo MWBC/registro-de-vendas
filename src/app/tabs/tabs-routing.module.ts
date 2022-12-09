@@ -18,6 +18,10 @@ const routes: Routes = [
         loadChildren: () => import('./sales-tab/sales-tab.module').then( m => m.SalesTabPageModule)
       },  
       {
+        path: 'services', 
+        loadChildren: () => import('./services-tab/services-tab.module').then(m => m.ServicesTabPageModule)
+      },
+      {
         path: '', 
         redirectTo: 'home', 
         pathMatch: 'full'
@@ -29,7 +33,12 @@ const routes: Routes = [
     path: '', 
     redirectTo: 'home', 
     pathMatch: 'full'
+  },
+  {
+    path: 'services-tab',
+    loadChildren: () => import('./services-tab/services-tab.module').then( m => m.ServicesTabPageModule)
   }
+
 ];
 
 @NgModule({

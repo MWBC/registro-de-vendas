@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SalesTabPageRoutingModule } from './sales-tab-routing.module';
+import { ModalSaleShowModule } from '../../modal-sale-show/modal-sale-show.module';
+import { ModalSaleStoreModule } from '../../modal-sale-store/modal-sale-store.module';
 
 import { SalesTabPage } from './sales-tab.page';
 
@@ -13,7 +15,9 @@ import { SalesTabPage } from './sales-tab.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SalesTabPageRoutingModule
+    SalesTabPageRoutingModule, 
+    ModalSaleShowModule, 
+    ModalSaleStoreModule
   ],
   declarations: [SalesTabPage]
 })

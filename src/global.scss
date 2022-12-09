@@ -30,6 +30,7 @@
 
     .toolbar-title {
 
+        font-size: 1.2rem;
         --color: red;
     }
     --border-radius: 5px;
@@ -48,6 +49,29 @@
    
 }
 
+.modal-label {
+
+    font-size: 1.2rem;
+}
+
+.modal-input {
+
+    font-size: 1.2rem;
+}
+
+.custom-ion-item-invalid {
+
+    --highlight-color-valid: red;
+}
+
+.invalid-input-value {
+
+    & span {
+
+        color: red;
+    }
+}
+
  .ion-color-rcustom {
 
     --ion-color-base: var(--ion-color-rcustom);
@@ -57,6 +81,20 @@
     --ion-color-shade: var(--ion-color-rcustom-shade);
     --ion-color-tint: var(--ion-color-rcustom-tint);
  }
+
+ 
+
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
+
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: normal;
+}
+
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 

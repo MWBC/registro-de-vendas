@@ -6,7 +6,7 @@ import { Color, Label } from 'ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 
-import { URL_BASE, moneyMask, fillsWithZeros, showLoading } from '../../../utils';
+import { fillsWithZeros, showLoading } from '../../../utils';
 
 import { ProgressPopoverComponent } from '../../progress-popover/progress-popover.component';
 import { ProgressButtonsPopoverComponent } from './../../progress-buttons-popover/progress-buttons-popover.component';
@@ -96,6 +96,7 @@ export class MainTabPage implements OnInit {
 
       this.goalsService.refreshView$.subscribe(resp => {
 
+        this.chartData = [{data: [], label: ''}];
         this.prepareMainPage();
       }, error => console.log(error));
     }
@@ -103,8 +104,6 @@ export class MainTabPage implements OnInit {
   ngOnInit() {
     
     this.authService.checkToken();
-    moneyMask(3000.82);
-    // this.prepareMainPage();
   }
 
   ionViewWillEnter() {
@@ -280,7 +279,7 @@ prepareProgressBar(sales: any, goal:any){
 
     this.circleProgressStyle = {
 
-      "background":'conic-gradient(#00FF00 ' + this.progressValue + ', 0, #ecf0f1' + this.missingProgressValue + ')', 
+      "background":'conic-gradient(#00FF00 ' + this.progressValue + ', 0, #ecf0f1 ' + this.missingProgressValue + ')', 
       "width": '100%', 
       "height": '100%' ,
       "border-radius": '50%', 
@@ -288,12 +287,13 @@ prepareProgressBar(sales: any, goal:any){
       "justify-content": 'center', 
       "align-items": 'center'
     };
-  
+
+    console.log(this.circleProgressStyle);
     this.circleProgressInsideStyle = {
   
       "width": '80%', 
       "height": '80%', 
-       "background-color": '#fff', 
+      "background-color": '#fff', 
       "border-radius": '50%', 
       "display": 'flex', 
       "justify-content": 'center', 

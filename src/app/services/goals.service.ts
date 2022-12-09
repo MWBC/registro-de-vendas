@@ -1,8 +1,9 @@
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
-import { URL_BASE, showLoading, showAlert, convertToFloat } from '../../utils';
+import { URL_BASE, showLoading, showAlert, convertToFloat, changeValue, validateValue } from '../../utils';
 import { Subject } from 'rxjs';
+import { CurrencyPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -189,23 +190,13 @@ async showSuccessAlert(message: string) {
   await alert.present();
 }
 
+changeGoalValue(event: any, showInvalidWarning: boolean) {
+
+  return changeValue(event, showInvalidWarning);
+}
+
 validateGoalValue(goalValue: string) {
 
-  try{
-
-    goalValue = convertToFloat(goalValue);
-
-  }catch(e){
-
-    return false;
-  }
-  
-  if(goalValue == '' || goalValue == undefined){
-
-    return false;
-  }else{
-
-    return true;
-  }
+  return validateValue(goalValue);
 }
 }

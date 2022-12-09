@@ -56,6 +56,7 @@ export class LoginPage implements OnInit {
           this.router.navigateByUrl('tabs/home', {replaceUrl: true});
         }).catch(async error => {
 
+          console.log(error);
           await this.loadingCtrl.dismiss('', '', 'defaultLoading');
 
           if(error.status == '401'){

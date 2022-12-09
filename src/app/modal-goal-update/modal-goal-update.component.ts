@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
@@ -29,14 +28,16 @@ export class ModalGoalUpdateComponent implements OnInit {
 
   }
 
-  //criar nova funcao para converter a entrada para float
   changeGoalValue(event: any) {
 
-    this.showInvalidWarning = false;
-    let currencyPipe = new CurrencyPipe('pt-BR', 'BRL');
-    let value = convertToFloat(event);
-    this.goalValue = currencyPipe.transform(value);
-    console.log(this.ionItem['el'].classList);
+    this.goalValue = this.goalService.changeGoalValue(event, this.showInvalidWarning);
+    this.showInvalidWarning = ! this.goalService.validateGoalValue(this.goalValue);
+    console.log('showwarning: ', this.showInvalidWarning);
+    // this.showInvalidWarning = false;
+    // let currencyPipe = new CurrencyPipe('pt-BR', 'BRL');
+    // let value = convertToFloat(event);
+    // this.goalValue = currencyPipe.transform(value);
+    // console.log(this.ionItem['el'].classList);
   }
 
   //atualizar a meta mensal
@@ -74,6 +75,7 @@ export class ModalGoalUpdateComponent implements OnInit {
       this.showInvalidWarning = true;
     }
   }
+  
   doDismiss() {
 
     this.modalController.dismiss('', '', 'goalUpdateModal');

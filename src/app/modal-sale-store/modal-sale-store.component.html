@@ -1,0 +1,79 @@
+      <ion-header>
+
+        <ion-toolbar>
+      
+          <ion-title class="toolbar-title" size="small">Salvar Venda</ion-title>
+      
+          <ion-buttons slot="end">
+      
+            <ion-button (click)="dismissModal()">Cancelar</ion-button>
+            <ion-button (click)="chooseAction()">Salvar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+<ion-content>
+
+  <ion-grid style="margin-top: 10px;">
+
+    <form (ngSubmit)="chooseAction();">
+
+
+      <ion-row>
+
+        <ion-col size="12">
+  
+          <ion-item>
+  
+            <ion-label position="stacked" class="modal-label">Cliente:</ion-label>
+            <ion-input inputmode="text" [(ngModel)]="clientName" name="clientName" class="modal-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row style="display: flex; justify-content: center;"> 
+  
+        <ion-col size="12">
+  
+          <ion-item #ionItem>
+  
+            <ion-label position="stacked" class="modal-label">Valor:</ion-label>
+            <ion-input class="modal-input" [(ngModel)]="apliedPrice" name="apliedPrice" (ngModelChange)="changeSaleValue($event);" inputmode="numeric" placeholder="R$ 00,00"></ion-input>
+          </ion-item>
+        </ion-col>
+        <div *ngIf="showInvalidWarning" class="invalid-input-value">
+  
+          <span>Valor inválido</span>
+        </div>
+      </ion-row>
+  
+      <ion-row>
+  
+        <ion-col>
+  
+          <ion-item>
+  
+            <ion-label position="stacked" class="modal-label">Serviço:</ion-label>
+            <ion-select ok-text="Ok" cancel-text="Fechar" [(ngModel)]="serviceId" name="serviceId" class="modal-input" value="{{serviceId}}">
+  
+              <ion-select-option *ngFor="let service of services" value="{{service.id}}">{{service.title}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+  
+        <ion-col size="12">
+  
+          <ion-item>
+  
+            <ion-label position="stacked" class="modal-label">Data: </ion-label>
+            <ion-datetime display-format="DD/MM/YYYY" display-timezone="utc" [(ngModel)]="date" placeholder="Escolha a data" class="modal-input" cancel-text="Cancelar" done-text="Ok" name="date"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
